@@ -36,11 +36,11 @@ The deployment script assumes that you're using AWS Lambda to host sunbot and th
 ### Project Directory Structure
 
 * [src/][6]
-** [bot/][7] - The core code of the bot lives here.
-** [commands/][8] - Each Discord command managed by sunbot is defined in a file in this directory.
-** [lib/][9] - General library code should go here.
-** [index.js][10] - This is the entry point of the bot's request handler.
-** [run_register_commands.js][11] - This script registers the bot's commands to Discord. It exists outside of the request handler because it only needs to be run when a command is added or updated. The `npm run deploy` script runs this script automatically.
+    * [bot/][7] - The core code of the bot lives here.
+    * [commands/][8] - Each Discord command managed by sunbot is defined in a file in this directory.
+    * [lib/][9] - General library code should go here.
+    * [index.js][10] - This is the entry point of the bot's request handler.
+    * [run_register_commands.js][11] - This script registers the bot's commands to Discord. It exists outside of the request handler because it only needs to be run when a command is added or updated. The `npm run deploy` script runs this script automatically.
 
 [6]: src
 [7]: src/bot
