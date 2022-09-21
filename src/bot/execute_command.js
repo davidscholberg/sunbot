@@ -1,5 +1,5 @@
 export default function makeExecuteCommand(InteractionType, InteractionResponseType, commandMap) {
-  return (body) => {
+  return async (body) => {
     if (typeof body.type === 'undefined') {
       throw new Error('body.type is missing');
     }
@@ -24,7 +24,7 @@ export default function makeExecuteCommand(InteractionType, InteractionResponseT
     }
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: command.respond(body.data) },
+      data: { content: await command.respond(body.data) },
     };
   };
 }

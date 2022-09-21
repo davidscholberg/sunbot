@@ -1,5 +1,5 @@
-import hello from './hello';
+import makeHelloCommand from './hello';
 
-test('hello respond function returns expected values', () => {
-  expect(typeof hello.respond({})).toBe('string');
+test('hello respond function returns expected values', async () => {
+  expect(typeof await makeHelloCommand().respond({})).toBe('string');
 });

@@ -2,13 +2,14 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 
 /* eslint-disable import/extensions */
-import makeGetConfig from './configure.js';
-import commandMap from './command_map.js';
-import makeRegisterCommands from './register_commands.js';
+import makeGetConfig from './bot/configure.js';
+import makeGetCommandMap from './bot/command_map.js';
+import makeRegisterCommands from './bot/register_commands.js';
 /* eslint-enable import/extensions */
 
 dotenv.config();
 const config = makeGetConfig(process.env)();
+const commandMap = makeGetCommandMap(config)();
 const registerCommands = makeRegisterCommands(config, commandMap, axios);
 const settledResults = await registerCommands();
 settledResults.forEach((s) => {

@@ -56,7 +56,7 @@ const commandMapWithoutFoo = {
   },
 };
 
-test('executeCommand returns expected values', () => {
+test('executeCommand returns expected values', async () => {
   const executeCommandWithoutFoo = makeExecuteCommand(
     InteractionType,
     InteractionResponseType,
@@ -67,40 +67,40 @@ test('executeCommand returns expected values', () => {
     InteractionResponseType,
     commandMapWithFoo,
   );
-  expect(executeCommandWithoutFoo(bodyWithPing)).toMatchObject({
+  await expect(executeCommandWithoutFoo(bodyWithPing)).resolves.toMatchObject({
     type: InteractionResponseType.PONG,
   });
-  expect(executeCommandWithoutFoo(bodyWithNonPing)).toBeNull();
-  expect(executeCommandWithFoo(bodyWithNonPing)).toMatchObject({
+  await expect(executeCommandWithoutFoo(bodyWithNonPing)).resolves.toBeNull();
+  await expect(executeCommandWithFoo(bodyWithNonPing)).resolves.toMatchObject({
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     data: { content: 'baz' },
   });
 });
 
-test('executeCommand throws exceptions when parameters are missing needed properties', () => {
-  expect(() => makeExecuteCommand(
+test('executeCommand throws exceptions when parameters are missing needed properties', async () => {
+  await expect(makeExecuteCommand(
     InteractionType,
     InteractionResponseType,
     commandMapWithFoo,
-  )(bodyMissingType)).toThrow(new Error('body.type is missing'));
-  expect(() => makeExecuteCommand(
+  )(bodyMissingType)).rejects.toMatchObject(new Error('body.type is missing'));
+  await expect(makeExecuteCommand(
     InteractionType,
     InteractionResponseType,
     commandMapWithFoo,
-  )(bodyMissingDataName)).toThrow(new Error('body.data.name is missing'));
-  expect(() => makeExecuteCommand(
+  )(bodyMissingDataName)).rejects.toMatchObject(new Error('body.data.name is missing'));
+  await expect(makeExecuteCommand(
     {},
     InteractionResponseType,
     commandMapWithFoo,
-  )(bodyWithNonPing)).toThrow(new Error('InteractionType.PING is missing'));
-  expect(() => makeExecuteCommand(
+  )(bodyWithNonPing)).rejects.toMatchObject(new Error('InteractionType.PING is missing'));
+  await expect(makeExecuteCommand(
     InteractionType,
     InteractionResponseTypeMissingPong,
     commandMapWithFoo,
-  )(bodyWithNonPing)).toThrow(new Error('InteractionResponseType.PONG is missing'));
-  expect(() => makeExecuteCommand(
+  )(bodyWithNonPing)).rejects.toMatchObject(new Error('InteractionResponseType.PONG is missing'));
+  await expect(makeExecuteCommand(
     InteractionType,
     InteractionResponseTypeMissingChannel,
     commandMapWithFoo,
-  )(bodyWithNonPing)).toThrow(new Error('InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE is missing'));
+  )(bodyWithNonPing)).rejects.toMatchObject(new Error('InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE is missing'));
 });

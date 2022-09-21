@@ -33,15 +33,25 @@ The deployment script assumes that you're using AWS Lambda to host sunbot and th
 
 [5]: https://aws.amazon.com/cli/
 
-### Adding slash commands
+### Project Directory Structure
 
-Each slash command managed by sunbot is defined in a file in [src/commands][6].
+* [src/][6]
+** [bot/][7] - The core code of the bot lives here.
+** [commands/][8] - Each Discord command managed by sunbot is defined in a file in this directory.
+** [lib/][9] - General library code should go here.
+** [index.js][10] - This is the entry point of the bot's request handler.
+** [run_register_commands.js][11] - This script registers the bot's commands to Discord. It exists outside of the request handler because it only needs to be run when a command is added or updated. The `npm run deploy` script runs this script automatically.
 
-[6]: src/commands
+[6]: src
+[7]: src/bot
+[8]: src/commands
+[9]: src/lib
+[10]: src/index.js
+[11]: src/run_register_commands.js
 
 ### Credits
 
-Most of the core code in this bot is based on code from [Build a Discord Bot With AWS Lambda + API Gateway][7] by [jakjus][8].
+Most of the core code in this bot is based on code from [Build a Discord Bot With AWS Lambda + API Gateway][12] by [jakjus][13].
 
-[7]: https://betterprogramming.pub/build-a-discord-bot-with-aws-lambda-api-gateway-cc1cff750292
-[8]: https://jakjus.com/
+[12]: https://betterprogramming.pub/build-a-discord-bot-with-aws-lambda-api-gateway-cc1cff750292
+[13]: https://jakjus.com/
