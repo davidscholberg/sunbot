@@ -1,6 +1,6 @@
 export default function makeRegisterCommands(config, commandMap, http) {
   const getRequestConfig = (commandData) => ({
-    url: `/api/v8/applications/${config.discordAppID}/guilds/${config.discordGuildID}/commands`,
+    url: `/api/v10/applications/${config.discordAppID}/guilds/${config.discordGuildID}/commands`,
     method: 'post',
     baseURL: 'https://discord.com',
     headers: {
