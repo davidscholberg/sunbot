@@ -6,6 +6,7 @@ const envTest = {
   DISCORD_APP_ID: 'discord_app_id',
   DISCORD_GUILD_ID: 'discord_guild_id',
   WEATHERBIT_API_KEY: 'weatherbit_api_key',
+  YOUTUBE_API_KEY: 'youtube_api_key',
 };
 
 const configStructure = {
@@ -14,6 +15,7 @@ const configStructure = {
   discordAppID: 'discord_app_id',
   discordGuildID: 'discord_guild_id',
   weatherbitApiKey: 'weatherbit_api_key',
+  youtubeApiKey: 'youtube_api_key',
 };
 
 test('config contains all needed entries at their expected values', () => {

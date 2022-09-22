@@ -10,6 +10,7 @@ export default function makeGetConfig(env) {
       discordAppID: env.DISCORD_APP_ID,
       discordGuildID: env.DISCORD_GUILD_ID,
       weatherbitApiKey: env.WEATHERBIT_API_KEY,
+      youtubeApiKey: env.YOUTUBE_API_KEY,
     };
     Object.values(config).forEach((value) => {
       if (typeof value === 'undefined') {
