@@ -33,6 +33,14 @@ The deployment script assumes that you're using AWS Lambda to host sunbot and th
 
 [5]: https://aws.amazon.com/cli/
 
+### Development
+
+Install the pre-commit git hook to automatically run the unit tests before each commit:
+
+```bash
+npm run precommit
+```
+
 ### Project Directory Structure
 
 * [src/][6]

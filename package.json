@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "precommit": "echo -e '#!/usr/bin/sh\n\nnpm test' > .git/hooks/pre-commit && chmod 755 .git/hooks/pre-commit",
     "register": "node src/run_register_commands.js",
     "deploy": "npm install --only=prod && rm -f sunbot.zip && zip -r sunbot.zip . && aws lambda update-function-code --function-name sunbot --zip-file fileb://sunbot.zip && npm run register"
   },
