@@ -34,14 +34,6 @@ const InteractionResponseType = {
   CHANNEL_MESSAGE_WITH_SOURCE: 2,
 };
 
-const InteractionResponseTypeMissingPong = {
-  CHANNEL_MESSAGE_WITH_SOURCE: 2,
-};
-
-const InteractionResponseTypeMissingChannel = {
-  PONG: 1,
-};
-
 const commandMapWithFoo = {
   foo: {
     // eslint-disable-next-line no-unused-vars
@@ -92,19 +84,4 @@ test('executeCommand throws exceptions when parameters are missing needed proper
     InteractionResponseType,
     commandMapWithFoo,
   )(bodyMissingDataName)).rejects.toMatchObject(new Error('body.data.name is missing'));
-  await expect(makeExecuteCommand(
-    {},
-    InteractionResponseType,
-    commandMapWithFoo,
-  )(bodyWithNonPing)).rejects.toMatchObject(new Error('InteractionType.PING is missing'));
-  await expect(makeExecuteCommand(
-    InteractionType,
-    InteractionResponseTypeMissingPong,
-    commandMapWithFoo,
-  )(bodyWithNonPing)).rejects.toMatchObject(new Error('InteractionResponseType.PONG is missing'));
-  await expect(makeExecuteCommand(
-    InteractionType,
-    InteractionResponseTypeMissingChannel,
-    commandMapWithFoo,
-  )(bodyWithNonPing)).rejects.toMatchObject(new Error('InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE is missing'));
 });
