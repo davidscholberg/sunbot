@@ -7,8 +7,10 @@
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "precommit": "echo -e '#!/usr/bin/sh\n\nnpm test' > .git/hooks/pre-commit && chmod 755 .git/hooks/pre-commit",
+    "zip": "rm -f sunbot.zip && zip -qr sunbot.zip .",
+    "push": "aws lambda update-function-code --function-name sunbot --zip-file fileb://sunbot.zip",
     "register": "node src/run_register_commands.js",
-    "deploy": "npm install --only=prod && rm -f sunbot.zip && zip -qr sunbot.zip . && aws lambda update-function-code --function-name sunbot --zip-file fileb://sunbot.zip && npm run register"
+    "deploy": "npm install --only=prod && npm run zip && npm run push && npm run register"
   },
   "author": "David Scholberg <recombinant.vector@gmail.com>",
   "license": "BSD-2-Clause",
