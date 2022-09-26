@@ -19,24 +19,14 @@ export default function makeWeatherCommand(weather, convert) {
         throw new Error('city parameter is empty');
       }
       const weatherData = await weather.getCurrentWeather(city);
-      const weatherDataFields = [
-        `${weatherData.temp}°C (${convert(weatherData.temp).from('C').to('F').toFixed(2)}°F)`,
-        `${weatherData.rh}% humidity`,
-        `Dew point ${weatherData.dewpt}°C (${convert(weatherData.dewpt).from('C').to('F').toFixed(2)}°F)`,
-        `Wind ${weatherData.wind_cdir} at ${convert(weatherData.wind_spd).from('m/s').to('km/h').toFixed(2)}km/h`
-        + ` (${convert(weatherData.wind_spd).from('m/s').to('m/h').toFixed(2)}mph)`,
-        `${weatherData.weather.description}`,
-      ];
       return {
-        embeds: [
-          {
-            title: `Current weather for ${weatherData.city_name},${weatherData.country_code === 'US' ? ` ${weatherData.state_code},` : ''} ${weatherData.country_code}`,
-            fields: weatherDataFields.map((f) => ({
-              name: '\u200B',
-              value: f,
-            })),
-          },
-        ],
+        content:
+          `**Current weather for ${weatherData.city_name},${weatherData.country_code === 'US' ? ` ${weatherData.state_code},` : ''} ${weatherData.country_code}**\n`
+          + `>>> 🌡️ ${Math.round(weatherData.temp)}°C (${Math.round(convert(weatherData.temp).from('C').to('F'))}°F)\n`
+          + `💦 ${weatherData.rh}% humidity\n`
+          + `🌬️ ${weatherData.wind_cdir} at ${Math.round(convert(weatherData.wind_spd).from('m/s').to('km/h'))} km/h`
+          + ` (${Math.round(convert(weatherData.wind_spd).from('m/s').to('m/h'))} mph)\n`
+          + `👀 ${weatherData.weather.description}`,
       };
     },
   };

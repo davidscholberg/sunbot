@@ -59,63 +59,21 @@ const weatherNonUS = {
 };
 
 const weatherUSOutput = {
-  embeds: [
-    {
-      title: 'Current weather for New York, NY, US',
-      fields: [
-        {
-          name: '\u200B',
-          value: '25°C (77.00°F)',
-        },
-        {
-          name: '\u200B',
-          value: '50% humidity',
-        },
-        {
-          name: '\u200B',
-          value: 'Dew point 20°C (68.00°F)',
-        },
-        {
-          name: '\u200B',
-          value: 'Wind SSW at 18.00km/h (11.18mph)',
-        },
-        {
-          name: '\u200B',
-          value: 'Cloudy',
-        },
-      ],
-    },
-  ],
+  content:
+    '**Current weather for New York, NY, US**\n'
+    + '>>> 🌡️ 25°C (77°F)\n'
+    + '💦 50% humidity\n'
+    + '🌬️ SSW at 18 km/h (11 mph)\n'
+    + '👀 Cloudy',
 };
 
 const weatherNonUSOutput = {
-  embeds: [
-    {
-      title: 'Current weather for Paris, FR',
-      fields: [
-        {
-          name: '\u200B',
-          value: '25°C (77.00°F)',
-        },
-        {
-          name: '\u200B',
-          value: '50% humidity',
-        },
-        {
-          name: '\u200B',
-          value: 'Dew point 20°C (68.00°F)',
-        },
-        {
-          name: '\u200B',
-          value: 'Wind SSW at 18.00km/h (11.18mph)',
-        },
-        {
-          name: '\u200B',
-          value: 'Cloudy',
-        },
-      ],
-    },
-  ],
+  content:
+    '**Current weather for Paris, FR**\n'
+    + '>>> 🌡️ 25°C (77°F)\n'
+    + '💦 50% humidity\n'
+    + '🌬️ SSW at 18 km/h (11 mph)\n'
+    + '👀 Cloudy',
 };
 
 const weatherReject = {
