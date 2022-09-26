@@ -45,14 +45,18 @@ const InteractionResponseTypeMissingChannel = {
 const commandMapWithFoo = {
   foo: {
     // eslint-disable-next-line no-unused-vars
-    respond: (data) => 'baz',
+    respond: async (data) => Promise.resolve({
+      content: 'baz',
+    }),
   },
 };
 
 const commandMapWithoutFoo = {
   bar: {
     // eslint-disable-next-line no-unused-vars
-    respond: (data) => 'baz',
+    respond: (data) => Promise.resolve({
+      content: 'baz',
+    }),
   },
 };
 

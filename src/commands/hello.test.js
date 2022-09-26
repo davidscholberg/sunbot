@@ -1,5 +1,7 @@
 import makeHelloCommand from './hello';
 
 test('hello respond function returns expected values', async () => {
-  expect(typeof await makeHelloCommand().respond({})).toBe('string');
+  await expect(makeHelloCommand().respond({})).resolves.toMatchObject({
+    content: expect.any(String),
+  });
 });

@@ -19,7 +19,9 @@ export default function makeYoutubeCommand(youtubeSearch) {
         throw new Error('search parameter is empty');
       }
       const result = await youtubeSearch(searchQuery);
-      return `https://youtu.be/${result.id.videoId}`;
+      return {
+        content: `https://youtu.be/${result.id.videoId}`,
+      };
     },
   };
 }

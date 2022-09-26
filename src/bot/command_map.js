@@ -12,7 +12,7 @@ import makeYoutubeCommand from '../commands/youtube.js';
 export default function makeGetCommandMap(config) {
   const commandList = [
     makeHelloCommand(),
-    makeWeatherCommand(makeWeatherbit(config, axios, convert)),
+    makeWeatherCommand(makeWeatherbit(config, axios), convert),
     makeYoutubeCommand(makeYoutubeSearch(config, axios)),
   ];
   let commandMap = null;

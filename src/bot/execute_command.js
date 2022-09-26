@@ -24,7 +24,7 @@ export default function makeExecuteCommand(InteractionType, InteractionResponseT
     }
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: await command.respond(body.data) },
+      data: await command.respond(body.data),
     };
   };
 }

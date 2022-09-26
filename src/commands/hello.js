@@ -9,7 +9,9 @@ export default function makeHelloCommand() {
     respond: async (data) => {
       const greetings = ['hi', 'hello', 'hey there', 'greetings', 'hola', 'aloha'];
       const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-      return `${randomGreeting} (⁠☞ﾟ⁠ヮﾟ⁠)⁠☞`;
+      return {
+        content: `${randomGreeting} (⁠☞ﾟ⁠ヮﾟ⁠)⁠☞`,
+      };
     },
   };
 }
