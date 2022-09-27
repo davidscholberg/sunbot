@@ -9,6 +9,7 @@ export default function makeGetConfig(env) {
       discordToken: env.DISCORD_TOKEN,
       discordAppID: env.DISCORD_APP_ID,
       discordGuildID: env.DISCORD_GUILD_ID,
+      tenorApiKey: env.TENOR_API_KEY,
       weatherbitApiKey: env.WEATHERBIT_API_KEY,
       youtubeApiKey: env.YOUTUBE_API_KEY,
     };

@@ -5,6 +5,7 @@ const envTest = {
   DISCORD_TOKEN: 'discord_token',
   DISCORD_APP_ID: 'discord_app_id',
   DISCORD_GUILD_ID: 'discord_guild_id',
+  TENOR_API_KEY: 'tenor_api_key',
   WEATHERBIT_API_KEY: 'weatherbit_api_key',
   YOUTUBE_API_KEY: 'youtube_api_key',
 };
@@ -14,6 +15,7 @@ const configStructure = {
   discordToken: 'discord_token',
   discordAppID: 'discord_app_id',
   discordGuildID: 'discord_guild_id',
+  tenorApiKey: 'tenor_api_key',
   weatherbitApiKey: 'weatherbit_api_key',
   youtubeApiKey: 'youtube_api_key',
 };
