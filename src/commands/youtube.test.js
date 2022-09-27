@@ -32,7 +32,7 @@ const youtubeSearch = async (a) => Promise.resolve({
 // eslint-disable-next-line no-unused-vars
 const youtubeSearchReject = async (a) => Promise.reject(new Error('gave you up'));
 
-test('weather respond function returns expected values', async () => {
+test('youtube respond function returns expected values', async () => {
   await expect(makeYoutubeCommand(youtubeSearch).respond(data)).resolves.toMatchObject({
     content: 'https://youtu.be/dQw4w9WgXcQ',
   });
