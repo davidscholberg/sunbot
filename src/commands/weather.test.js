@@ -1,6 +1,12 @@
 import convert from 'convert-units';
 
-import makeWeatherCommand from './weather';
+import weatherCommand from './weather';
+
+const respond = {
+  withMessage: (message) => ({
+    message,
+  }),
+};
 
 const data = {
   options: [
@@ -25,8 +31,7 @@ const dataMissingValue = {
 };
 
 const weatherUS = {
-  // eslint-disable-next-line no-unused-vars
-  getCurrentWeather: async (a) => Promise.resolve({
+  getCurrentWeather: async () => Promise.resolve({
     city_name: 'New York',
     state_code: 'NY',
     country_code: 'US',
@@ -42,8 +47,7 @@ const weatherUS = {
 };
 
 const weatherNonUS = {
-  // eslint-disable-next-line no-unused-vars
-  getCurrentWeather: async (a) => Promise.resolve({
+  getCurrentWeather: async () => Promise.resolve({
     city_name: 'Paris',
     state_code: '11',
     country_code: 'FR',
@@ -59,7 +63,7 @@ const weatherNonUS = {
 };
 
 const weatherUSOutput = {
-  content:
+  message:
     '**Current weather for New York, NY, US**\n'
     + '>>> 🌡️ 25°C (77°F)\n'
     + '💦 50% humidity\n'
@@ -68,7 +72,7 @@ const weatherUSOutput = {
 };
 
 const weatherNonUSOutput = {
-  content:
+  message:
     '**Current weather for Paris, FR**\n'
     + '>>> 🌡️ 25°C (77°F)\n'
     + '💦 50% humidity\n'
@@ -77,16 +81,15 @@ const weatherNonUSOutput = {
 };
 
 const weatherReject = {
-  // eslint-disable-next-line no-unused-vars
-  getCurrentWeather: async (a) => Promise.reject(new Error('bar')),
+  getCurrentWeather: async () => Promise.reject(new Error('bar')),
 };
 
-test('weather respond function returns expected values', async () => {
-  await expect(makeWeatherCommand(weatherUS, convert).respond(data))
+test('weather execute function returns expected values', async () => {
+  await expect(weatherCommand.makeExecute(respond, weatherUS, convert)(data))
     .resolves.toMatchObject(weatherUSOutput);
-  await expect(makeWeatherCommand(weatherNonUS, convert).respond(data))
+  await expect(weatherCommand.makeExecute(respond, weatherNonUS, convert)(data))
     .resolves.toMatchObject(weatherNonUSOutput);
-  await expect(makeWeatherCommand(weatherUS).respond(dataMissingValue)).rejects.toMatchObject(new TypeError('Cannot read properties of undefined (reading \'trim\')'));
-  await expect(makeWeatherCommand(weatherUS).respond(dataEmptyValue)).rejects.toMatchObject(new Error('city parameter is empty'));
-  await expect(makeWeatherCommand(weatherReject).respond(data)).rejects.toMatchObject(new Error('bar'));
+  await expect(weatherCommand.makeExecute(respond, weatherUS)(dataMissingValue)).rejects.toMatchObject(new TypeError('Cannot read properties of undefined (reading \'trim\')'));
+  await expect(weatherCommand.makeExecute(respond, weatherUS)(dataEmptyValue)).rejects.toMatchObject(new Error('city parameter is empty'));
+  await expect(weatherCommand.makeExecute(respond, weatherReject)(data)).rejects.toMatchObject(new Error('bar'));
 });

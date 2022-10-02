@@ -1,18 +1,22 @@
-import makeBoopCommand from './boop';
+import boopCommand from './boop';
+
+const respond = {
+  withMessage: (message) => ({
+    message,
+  }),
+};
 
 const gifSearch = {
-  // eslint-disable-next-line no-unused-vars
-  getRandomGif: async (a) => Promise.resolve('foo'),
+  getRandomGif: async () => Promise.resolve('foo'),
 };
 
 const gifSearchReject = {
-  // eslint-disable-next-line no-unused-vars
-  getRandomGif: async (a) => Promise.reject(new Error('bar')),
+  getRandomGif: async () => Promise.reject(new Error('bar')),
 };
 
-test('boop respond function returns expected values', async () => {
-  await expect(makeBoopCommand(gifSearch).respond({})).resolves.toMatchObject({
-    content: 'foo',
+test('boop execute function returns expected values', async () => {
+  await expect(boopCommand.makeExecute(respond, gifSearch)({})).resolves.toMatchObject({
+    message: 'foo',
   });
-  await expect(makeBoopCommand(gifSearchReject).respond({})).rejects.toMatchObject(new Error('bar'));
+  await expect(boopCommand.makeExecute(respond, gifSearchReject)({})).rejects.toMatchObject(new Error('bar'));
 });

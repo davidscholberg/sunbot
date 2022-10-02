@@ -1,7 +1,13 @@
-import makeHelloCommand from './hello';
+import helloCommand from './hello';
 
-test('hello respond function returns expected values', async () => {
-  await expect(makeHelloCommand().respond({})).resolves.toMatchObject({
-    content: expect.any(String),
+const respond = {
+  withMessage: (message) => ({
+    message,
+  }),
+};
+
+test('hello execute function returns expected values', async () => {
+  await expect(helloCommand.makeExecute(respond)({})).resolves.toMatchObject({
+    message: expect.any(String),
   });
 });
