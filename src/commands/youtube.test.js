@@ -1,4 +1,10 @@
-import makeYoutubeCommand from './youtube';
+import youtubeCommand from './youtube';
+
+const respond = {
+  withMessage: (message) => ({
+    message,
+  }),
+};
 
 const data = {
   options: [
@@ -22,21 +28,19 @@ const dataMissingValue = {
   ],
 };
 
-// eslint-disable-next-line no-unused-vars
-const youtubeSearch = async (a) => Promise.resolve({
+const youtubeSearch = async () => Promise.resolve({
   id: {
     videoId: 'dQw4w9WgXcQ',
   },
 });
 
-// eslint-disable-next-line no-unused-vars
-const youtubeSearchReject = async (a) => Promise.reject(new Error('gave you up'));
+const youtubeSearchReject = async () => Promise.reject(new Error('gave you up'));
 
 test('youtube respond function returns expected values', async () => {
-  await expect(makeYoutubeCommand(youtubeSearch).respond(data)).resolves.toMatchObject({
-    content: 'https://youtu.be/dQw4w9WgXcQ',
+  await expect(youtubeCommand.makeExecute(respond, youtubeSearch)(data)).resolves.toMatchObject({
+    message: 'https://youtu.be/dQw4w9WgXcQ',
   });
-  await expect(makeYoutubeCommand(youtubeSearch).respond(dataMissingValue)).rejects.toMatchObject(new TypeError('Cannot read properties of undefined (reading \'trim\')'));
-  await expect(makeYoutubeCommand(youtubeSearch).respond(dataEmptyValue)).rejects.toMatchObject(new Error('search parameter is empty'));
-  await expect(makeYoutubeCommand(youtubeSearchReject).respond(data)).rejects.toMatchObject(new Error('gave you up'));
+  await expect(youtubeCommand.makeExecute(respond, youtubeSearch)(dataMissingValue)).rejects.toMatchObject(new TypeError('Cannot read properties of undefined (reading \'trim\')'));
+  await expect(youtubeCommand.makeExecute(respond, youtubeSearch)(dataEmptyValue)).rejects.toMatchObject(new Error('search parameter is empty'));
+  await expect(youtubeCommand.makeExecute(respond, youtubeSearchReject)(data)).rejects.toMatchObject(new Error('gave you up'));
 });

@@ -1,7 +1,7 @@
 import makeGetCommandMap from './command_map';
 
 test('command map contains at least one entry', () => {
-  expect(Object.keys(makeGetCommandMap({})()).length).toBeGreaterThan(0);
+  expect(Object.keys(makeGetCommandMap({}, {})()).length).toBeGreaterThan(0);
 });
 
 const commandStructure = {
@@ -10,11 +10,11 @@ const commandStructure = {
     type: expect.any(Number),
     description: expect.any(String),
   }),
-  respond: expect.any(Function),
+  execute: expect.any(Function),
 };
 
 test('command map entries have the proper structure', () => {
-  Object.entries(makeGetCommandMap({})()).forEach(([commandName, command]) => {
+  Object.entries(makeGetCommandMap({}, {})()).forEach(([commandName, command]) => {
     expect(typeof commandName).toBe('string');
     expect(command).toMatchObject(commandStructure);
   });
